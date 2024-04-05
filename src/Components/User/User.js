@@ -14,14 +14,14 @@ import Modal from 'react-bootstrap/Modal';
 function User() {
     const [Show, setShow] = useState(false);
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [message, setMessage] = useState("");
+    const [Name, setName] = useState("");
+    const [Email, setEmail] = useState("");
+    const [Phone, setPhone] = useState("");
+    const [Message, setMessage] = useState("");
 
     const sendmailinfohandler = async () => {
         try {
-            let response = await axios.post(`${baseurl}/info`, { name: name, email: email, phone: phone, message: message });
+            let response = await axios.post(`${baseurl}/info`, { name: Name, email: Email, phone: Phone, message: Message });
             console.log(response);
             setName("");
             setEmail("");
@@ -102,16 +102,16 @@ function User() {
                                         </p>
                                         <div className="form">
                                             <div>
-                                                <input type="text" placeholder='Your Name' value={name} onChange={(e) => setName(e.target.value)} />
+                                                <input type="text" placeholder='Your Name' value={Name} onChange={(e) => setName(e.target.value)} />
                                             </div>
                                             <div>
-                                                <input type="text" placeholder='Your Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                                                <input type="text" placeholder='Your Email' value={Email} onChange={(e) => setEmail(e.target.value)} />
                                             </div>
                                             <div>
-                                                <input type="text" placeholder='Phone Number' value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                                <input type="text" placeholder='Phone Number' value={Phone} onChange={(e) => setPhone(e.target.value)} />
                                             </div>
                                             <div>
-                                                <textarea placeholder="Message" name="Mesaage" value={message} cols="30" rows="5" onChange={(e) => setMessage(e.target.value)}></textarea>
+                                                <textarea placeholder="Message" name="Mesaage" value={Message} cols="30" rows="5" onChange={(e) => setMessage(e.target.value)}></textarea>
                                             </div>
                                             <div className='btn mt-4'>
                                                 <button onClick={() => sendmailinfohandler()}>SUBMIT NOW</button>
