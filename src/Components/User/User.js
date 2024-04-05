@@ -7,8 +7,12 @@ import "animate.css/animate.min.css";
 import { AnimationOnScroll } from 'react-animation-on-scroll';
 import axios from 'axios';
 import { baseurl } from '../../urls';
+
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 // const BASE_URL = process.env.BASE_URL;
 function User() {
+    const [Show, setShow] = useState(false);
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -17,20 +21,40 @@ function User() {
 
     const sendmailinfohandler = async () => {
         try {
-            let response = await axios.post(`${baseurl}/info`, { name, email, phone, message });
+            let response = await axios.post(`${baseurl}/info`, { name: name, email: email, phone: phone, message: message });
             console.log(response);
             setName("");
             setEmail("");
             setPhone("");
             setMessage("");
+            setShow(true)
         } catch (error) {
             console.error(error);
         }
     }
+    const handleClose = () => setShow(false);
 
     return (
         <>
             <section id="User">
+                <Modal
+                    size="md"
+                    show={Show}
+                    onHide={() => setShow(false)}
+                    aria-labelledby="example-modal-sizes-title-sm"
+                    style={{ color: "var(--theme-color)" }}
+                >
+                    <Modal.Header style={{ background: "var(--bg2-color)" }}>
+                        <Modal.Title id="example-modal-sizes-title-sm" style={{ textAlign: "center" }}>
+                            Email Sent Successfully ...!!!
+                        </Modal.Title>
+                        <Modal.Footer>
+                            <Button style={{ background: "var(--theme-color)", color: "var(--bg2-color)" }} onClick={handleClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal.Header>
+                </Modal>
                 <div className="container">
                     <div className="user">
                         <div className="row">
@@ -78,7 +102,7 @@ function User() {
                                         </p>
                                         <div className="form">
                                             <div>
-                                                <input type="text" placeholder='Your Name' value={name}  onChange={(e) => setName(e.target.value)} />
+                                                <input type="text" placeholder='Your Name' value={name} onChange={(e) => setName(e.target.value)} />
                                             </div>
                                             <div>
                                                 <input type="text" placeholder='Your Email' value={email} onChange={(e) => setEmail(e.target.value)} />
